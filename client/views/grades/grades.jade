@@ -1,0 +1,55 @@
+h1 Grades
+
+h2 Courses
+  .row
+    .col-xs-6
+      .form-group
+        label(for='courseName') Course Name
+        input.form-control#courseName(type='text', ng-model='course.name')
+      .form-group
+        button.btn.btn-xs.btn-success.form-control(ng-click='addCourse(course)') Add Course
+    .col-xs-6
+      .form-group
+        label(for='courseSelect') Select Course
+        select.form-control#courseSelect(ng-model='test.course')
+          option(ng-repeat='course in afCourses') {{course.name}}
+  .row
+    .col-xs-6
+      .form-group
+        label(for='testName') Test Name
+        input.form-control#testName(type='text', ng-model='test.name')
+    .col-xs-6
+      .form-group
+        label(for='testGrade') Test Grade
+        input.form-control#testGrade(type='number',max='100', ng-model='test.grade')
+  .row
+    .col-xs-6
+      .form-group
+        label(for='testDate') Test Date
+        input.form-control#testDate(type='date', ng-model='test.date')
+  .row
+    .col-xs-6
+      .form-group
+        button.btn.btn-xs.btn-success.form-control(ng-click='addTest(test)') Add Test
+
+h2 Course Charts
+
+.container(ng-repeat='course in afCourses')
+  h2 {{course.name}}
+  table.table.table-striped
+    thead
+      tr
+        th Course
+        th Assignment Name
+        th Grade
+        th Date
+        th Edit
+        th Delete
+    tbody
+      tr(ng-repeat='test in afUser.tests')
+        td course {{test.course}}
+        td assignment {{test.name}}
+        td grade {{test.grade | date: 'MM-dd-yyyy'}}
+        td date {{test.date}}
+        th: button.btn.btn-danger(ng-click='editTest(test)') Edit
+        th: button.btn.btn-danger(ng-click='deleteTest(test)') Delete
